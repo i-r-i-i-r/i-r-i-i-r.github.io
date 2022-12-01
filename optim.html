@@ -106,12 +106,15 @@ def update_plot(*events): # グラフの更新
     wid.update_plot()
 
 # 非同期の更新
-await show(wid.data,       'dataset-option1' )
-await show(wid.data,       'dataset-option2' )
-await show(wid.eq,         'formula-option'   )
-await show(wid.slice,      'slice-option')
-await show(wid.intro,      'intro'       )
-await show(wid.plot,       'data-plot'   )
+
+await show(wid.dataset1,       'dataset-option1')
+await show(wid.dataset2,       'dataset-option2')
+await show(wid.formula,     'fomula-option' )
+await show(wid.slice,      'slice-option'  )
+await show(wid.intro,      'intro'         )
+#await show(wid.plot,       'data-plot'     )
+
+
 
 
         </py-script>

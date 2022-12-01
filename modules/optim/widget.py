@@ -19,7 +19,7 @@ class Widget:
         self.table = pn.widgets.Tabulator(pagination='remote', page_size=10)
         self.intro = _CONST.intro
         self._update_table()
-        self.plot.object = get_plot(self.x.value, self.y.value, self.table.value)
+        #self.plot.object = get_plot(self.x.value, self.y.value, self.table.value)
     
     #データがアップロードされたら格納する関数をつくる
     """
@@ -40,7 +40,7 @@ class Widget:
 
 await show(wid.dataset1,       'dataset-option1')
 await show(wid.dataset2,       'dataset-option2')
-await show(wid.formula     'fomula-option' )
+await show(wid.formula,     'fomula-option' )
 await show(wid.slice,      'slice-option'  )
 await show(wid.intro,      'intro'         )
-await show(wid.plot,       'data-plot'     )
+#await show(wid.plot,       'data-plot'     )
