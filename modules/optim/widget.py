@@ -38,9 +38,3 @@ class Widget:
         self.plot.selection.param.watch(self._update_filters, 'brush')
     """
 
-await show(wid.dataset1,       'dataset-option1')
-await show(wid.dataset2,       'dataset-option2')
-await show(wid.formula,     'fomula-option' )
-await show(wid.slice,      'slice-option'  )
-await show(wid.intro,      'intro'         )
-#await show(wid.plot,       'data-plot'     )
