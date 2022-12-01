@@ -38,3 +38,6 @@ class Widget:
         self.plot.selection.param.watch(self._update_filters, 'brush')
     """
 
+
+
+
