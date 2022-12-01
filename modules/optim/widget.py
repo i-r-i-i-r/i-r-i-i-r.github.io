@@ -2,6 +2,7 @@ import panel as pn
 from constant import Constant
 from analyze_and_visualize import get_plot, get_clusters
 
+
 # 表示内容の生成における初期設定
 _CONST = Constant()
 
