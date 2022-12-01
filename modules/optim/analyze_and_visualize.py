@@ -75,7 +75,7 @@ def calc_W(param, x, y, gain, alpha=0.02):
     W = np.dot(B, y)
     return W
 
-
+"""
 def main():
     # 設定ファイルの読み込み
     config = read_json("input/config_opt.json") 
@@ -132,3 +132,4 @@ def main():
 
         
 main()
+"""
