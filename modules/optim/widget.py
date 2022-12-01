@@ -9,10 +9,10 @@ _CONST = Constant()
 class Widget:
     def __init__(self):
         pn.config.sizing_mode = 'stretch_width'
-        self.dataset_option1 = pn.widgets.RadioBoxGroup(name= "What kind of dataset do you analyze?", options= ["your dataset (upload)", "example dataset"])
-        self.dataset_option2 = pn.widgets.RadioBoxGroup(name= "example dataset", options=_CONST.DATASET_EX_NAME, value=_CONST.DATASET_EX_NAME[0])
+        self.dataset1 = pn.widgets.RadioBoxGroup(name= "dataset option", options= ["your dataset (upload)", "example dataset"])
+        self.dataset2 = pn.widgets.RadioBoxGroup(name= "select example dataset", options=_CONST.DATASET_EX_NAME, value=_CONST.DATASET_EX_NAME[0])
         self.formula    = pn.widgets.Select(name='formula', options=_CONST.FORMULA_NAME, value=_CONST.FORMULA_NAME[0])
-        self.slice      = pn.widgets.RadioBoxGroup(name= "slice ( or not)", options=["not fixed", "fixed at 0"], value=["not fixed"])
+        self.slice      = pn.widgets.RadioBoxGroup(name= "slice", options=["not fixed", "fixed at 0"], value=["not fixed"])
         
         self.n_clusters.param.watch(self._update_table, 'value')
         self.plot  = pn.pane.Vega()
@@ -38,10 +38,9 @@ class Widget:
         self.plot.selection.param.watch(self._update_filters, 'brush')
     """
 
-
-
-await show(wid.data,       'dataset-option')
-await show(wid.eq,         'fomula-option' )
+await show(wid.dataset1,       'dataset-option1')
+await show(wid.dataset2,       'dataset-option2')
+await show(wid.formula     'fomula-option' )
 await show(wid.slice,      'slice-option'  )
 await show(wid.intro,      'intro'         )
 await show(wid.plot,       'data-plot'     )
