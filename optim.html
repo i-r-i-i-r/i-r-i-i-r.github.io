@@ -45,19 +45,20 @@
     </head>
     
     <py-env>
-        - altair
+        - matplotlib
         - numpy
         - pandas
         - scikit-learn
         - panel==0.13.1a2
         - paths:
-            - ./data/optim/ex1.csv
-            - ./data/optim/ex2.csv
-            - ./data/optim/ex3.csv
-            - ./data/optim/temp.csv
+            - ./data/optim/example 1.csv
+            - ./data/optim/example 2.csv
+            - ./data/optim/example 3.csv
+            - ./data/optim/template.csv
             - ./modules/optim/analyze_and_visualize.py
-            - ./modules/optim/constant.py
+            - ./modules/optim/nonlinopt.py
             - ./modules/optim/widget.py
+            - ./modules/selfmadeio/plot.py
     </py-env>
     
     <body>
@@ -65,12 +66,12 @@
           <nav class="navbar navbar-expand-md navbar-dark sticky-top shadow" id="header" style="background-color: #000000;">
     	<button type="button" class="navbar-toggle collapsed" id="sidebarCollapse">
     	  <span class="navbar-toggler-icon"></span>
-    	</button>
+    	</button>dim
     	<div class="app-header">
     	  <a class="navbar-brand app-logo" href="/">
-    	    <img src="./logo.png" class="app-logo">
+    	    <img src="./data/icon.png" class="app-logo">
     	  </a>
-    	  <a class="title" href="" style="color: #f0ab3c;">Panel KMeans Clustering Demo</a>
+    	  <a class="title" href="" style="color: #f0ab3c;">Fitting Demo</a>
     	</div>
           </nav>
         
@@ -80,7 +81,8 @@
                 <div class="bk-root" id="dataset-option1"></div>
                 <div class="bk-root" id="dataset-option2"></div>
                 <div class="bk-root" id="formula-option"></div>
-                <div class="bk-root" id="slice-option"></div>
+                <div class="bk-root" id="polydeg-option"></div>
+                <div class="bk-root" id="intercept-option"></div>
     	  </ul>
     	</div>
     	<div class="col mh-100 float-left" id="main">
@@ -95,25 +97,25 @@
 import asyncio
 import panel as pn
 from panel.io.pyodide import show
+import matplotlib.pyplot as plt
 from widget import Widget # 自作
 
 # ウィジェット(=GUIの構成要素)の初期化
 wid = Widget()
 
 # ウィジェットへの入力値が更新されるたびに以下の関数を実行する
-@pn.depends(wid.x, wid.y, wid.n_clusters, watch=True) 
+@pn.depends(wid.option.data_1, wid.option.data_2, wid.option.polyfit_deg, wid.option.intercept, watch=True)
 def update_plot(*events): # グラフの更新
     wid.update_plot()
 
 # 非同期の更新
-
-await show(wid.dataset1,       'dataset-option1')
-await show(wid.dataset2,       'dataset-option2')
-await show(wid.formula,     'fomula-option' )
-await show(wid.slice,      'slice-option'  )
-await show(wid.intro,      'intro'         )
-#await show(wid.plot,       'data-plot'     )
-
+await show(wid.option.data_1,      'dataset-option1' )
+await show(wid.option.data_2,      'dataset-option2' )
+await show(wid.option.formula,     'formula-option'  )
+await show(wid.option.polyfit_deg, 'polydeg-option'  )
+await show(wid.option.intercept,   'intercept-option')
+await show(wid.INTRO,              'intro'           )
+await show(wid.plot,               'data-plot'       )
 
 
 

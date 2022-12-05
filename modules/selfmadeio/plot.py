@@ -12,7 +12,7 @@ def make_scatter(x_data, y_data, save_name, \
               grid = True, plot_size = 2, axis_format = []):
     
     # プロットエリアの設定
-    plot_area = [plot_size, plot_size]
+    #plot_area = [plot_size, plot_size]
     
     # 定義域と値域の設定
     min_ = min(min(y_data), min(x_data))
@@ -32,7 +32,7 @@ def make_scatter(x_data, y_data, save_name, \
               color = color, marker = marker, marker_size = marker_size, \
               line_style = line_style, line_width = line_width, \
               label = label, xlim = lim, ylim = lim, title = title, \
-              grid = grid, plot_area = plot_area, axis_format = axis_format)
+              grid = grid, axis_format = axis_format)
 
 # グラフの作成と出力
 # x_data: np.ndarray
@@ -41,7 +41,7 @@ def make_plot(x_data, y_data, save_name, \
               color = [], marker = [], marker_size = [], \
               line_style = [], line_width = [], \
               label = ["x","y"], xlim = [], ylim = [], title = "", \
-              grid = False, plot_area = [2.4, 1.8], axis_format = []):
+              grid = False, axis_format = []):
     
     # 色: https://matplotlib.org/2.0.2/examples/color/named_colors.html
     
@@ -49,17 +49,18 @@ def make_plot(x_data, y_data, save_name, \
     mtxt.FontConstantsBase = mtxt.ComputerModernFontConstants
     
     # グラフエリア全体の書式設定
-    plt.rcParams['font.family'] = 'times new roman'
     plt.rcParams['mathtext.default'] = 'regular'
     plt.rcParams['xtick.direction'] = 'in'
     plt.rcParams['ytick.direction'] = 'in'
+    """
+    plt.rcParams['font.family'] = 'times new roman'
     plt.rcParams['xtick.major.width'] = 1.0
     plt.rcParams['ytick.major.width'] = 1.0
     plt.rcParams['font.size'] = 8
     plt.rcParams['axes.linewidth'] = 1.0
-    
+    """
     # プロットエリアの設定
-    plt.figure(figsize = (plot_area[0], plot_area[1]))
+    fig1, ax = plt.subplots()
     
     # 軸の値のフォーマット
     if len(axis_format)==2:
@@ -119,10 +120,20 @@ def make_plot(x_data, y_data, save_name, \
     plt.ylabel(label[1])
     
     # 定義域と値域
+    """
+    if disp_orient:
+        xlim_ = ax.get_xlim()
+        ylim_ = ax.get_ylim()
+        if xlim_[0]>0:
+            plt.xlim(0, xlim_u)
+            plt.ylim(0, ylim_u)
+    else:
+    """
     if len(xlim)==2:
         plt.xlim(xlim[0], xlim[1])
     if len(ylim)==2:
         plt.ylim(ylim[0], ylim[1])
+    
     
     # 目盛の最大個数
     plt.locator_params(axis='x', nbins=6)
@@ -141,8 +152,9 @@ def make_plot(x_data, y_data, save_name, \
     #plt.gca().yaxis.set_major_locator(ticker.MaxNLocator(integer=True))
     
     # レイアウトの調整
-    plt.tight_layout()
+    #plt.tight_layout()
     
     # 出力
-    plt.savefig(save_name+".png", transparent=True, dpi=600, format="png")
-    plt.close()
+    #plt.savefig(save_name+".png", transparent=True, dpi=600, format="png")
+    #plt.close()
+    return fig1
