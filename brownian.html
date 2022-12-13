@@ -6,19 +6,14 @@
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-status-bar-style" content="default">
         <meta name="theme-color" content="#000000">
-        <meta name="name" content="i-r-i-i-r/optim">
+        <meta name="name" content="i-r-i-i-r/brownian">
         
-        <title>i-r-i-i-r/optim</title>
+        <title>i-r-i-i-r/brownian</title>
         <link rel="icon" type="image/x-icon" href="./data/icon.png">
         
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" type="text/css" />
         <link rel="stylesheet" href="https://unpkg.com/@holoviz/panel@0.13.0/dist/css/widgets.css" type="text/css" />
         <link rel="stylesheet" href="https://unpkg.com/@holoviz/panel@0.13.0/dist/css/markdown.css" type="text/css" />
-        <!--
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML" type="text/css" />
-        <script type="text/javascript" async 
-         src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-         -->
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega@5"></script>
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
@@ -53,18 +48,11 @@
     <py-env>
         - matplotlib
         - numpy
-        - pandas
-        - scikit-learn
         - panel==0.13.1a2
         - paths:
-            - ./data/optim/example 1.csv
-            - ./data/optim/example 2.csv
-            - ./data/optim/example 3.csv
-            - ./data/optim/template.csv
-            - ./modules/optim/analyze_and_visualize.py
-            - ./modules/optim/nonlinopt.py
+            - ./modules/brownian/widget.py
+            - ./modules/brownian/calc_motion.py
             - ./modules/optim/widget.py
-            - ./modules/selfmadeio/plot.py
     </py-env>
     
     <body>
@@ -77,9 +65,6 @@
     	  <a class="navbar-brand app-logo" href="/">
     	    <img src="./data/icon.png" class="app-logo">
     	  </a>
-          <!--
-    	  <a class="title" href="" style="color: #f0ab3c;">Fitting Demo  \(F(\omega) = \cfrac{1}{\sqrt{2\pi}}\int_{-\infty}^{+\infty}f(t)e^{i\omega t}dt\)</a>
-    	  -->
     	  <a class="title" href="" style="color: #f0ab3c;">Fitting Demo</a>
     	</div>
           </nav>
@@ -87,27 +72,19 @@
           <div class="row overflow-hidden" id="content">
     	<div class="sidenav" id="sidebar">
     	  <ul class="nav flex-column">
-                <div class="bk-root" id="dataset-option1"></div>
-                <div class="bk-root" id="dataset-option2"></div>
-                <div class="bk-root" id="dataset-option3"></div>
-                <div class="bk-root" id="formula-option"></div>
-                <div class="bk-root" id="polydeg-option"></div>
-                <div class="bk-root" id="intercept-option"></div>
+                <div class="bk-root" id="N_particles"></div>
+                <div class="bk-root" id="Temperature"></div>
     	  </ul>
     	</div>
     	<div class="col mh-100 float-left" id="main">
     	  <div class="bk-root" id="intro"></div>
     	  <div class="bk-root" id="data-plot"></div>
-    	  <!--
-    	  <div class="bk-root" id="formula"></div>
-    	  -->
           
     	</div>
           </div>
         </div>
         <py-script>
 
-#    	  <div class="bk-root" id="formula"></div>
 # ライブラリのインポート
 import asyncio
 import panel as pn
@@ -119,28 +96,21 @@ from widget import Widget # 自作
 wid = Widget()
 
 # ウィジェットへの入力値が更新されるたびに以下の関数を実行する
-@pn.depends(wid.option.data_1, wid.option.data_2, wid.option.data_3, wid.option.polyfit_deg, wid.option.intercept, watch=True)
-def update_plot(*events): # グラフの更新
-    wid.update_plot()
+@pn.depends(wid.option.N_particles, wid.option.Temperature, watch=True)
+def update_setting(*events): # 設定の更新
+    wid.update_setting()
 
-# ファイルが選択されると実行される関数
-@pn.depends(wid.option.data_3.param.value, watch=True)
-def get_file(fvalue):
-    wid.uploaded = 1
-    wid.path = fvalue
+# 仮（より良い書き方があるはずだが不勉強）
+@pn.depends(wid., watch=True)
+def update_plot(*events): # 設定の更新
     wid.update_plot()
 
 
 # 非同期の更新
-await show(wid.option.data_1,      'dataset-option1' )
-await show(wid.option.data_2,      'dataset-option2' )
-await show(wid.option.data_3,      'dataset-option3' )
-await show(wid.option.formula,     'formula-option'  )
-await show(wid.option.polyfit_deg, 'polydeg-option'  )
-await show(wid.option.intercept,   'intercept-option')
-await show(wid.INTRO,              'intro'           )
-await show(wid.plot,               'data-plot'       )
-#await show(wid.formula_disp,       'formula'         )
+await show(wid.option.N_particles, 'N_particle'  )
+await show(wid.option.Temperature, 'Temperature' )
+await show(wid.INTRO,              'intro'       )
+await show(wid.plot,               'data-plot'   )
 
 
 

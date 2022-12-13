@@ -2,10 +2,7 @@ import numpy as np
 import pandas as pd
 import os
 import nonlinopt # 非線形最適化
-#from selfmadeio.io_json import read_json
-from plot import make_plot, make_scatter # 作図
-#from selfmadeio.io_csv import save_csv
-import matplotlib.pyplot as plt
+from plot import make_plot # 作図
 
 # 目的関数
 def objfun(param,x,y, gain=200):
@@ -92,6 +89,7 @@ def get_plot(dataset, n_deg, intercept_zero):
         y_fit = np.dot(phi_fit, coef_vec)
         disp_orient = 0
     
+    #coef_vec = [100,0.02,1,2,3]
     coef_disp_vec0 = ["{:+.2e}".format(c) for c in list(coef_vec)]
     coef_disp_vec0 = [c[0]+" "+c[1:].replace("e+00","") for c in coef_disp_vec0]
     coef_disp_vec1 = []
@@ -120,13 +118,47 @@ def get_plot(dataset, n_deg, intercept_zero):
     
     
     formula3 = r'$y$ = '+' '.join(formula2)
+    if n_deg>=6:
+        formula3=formula3.split("$x^{4}$")[0]+r"$x^{4}$"+ "\n"+formula3.split("$x^{4}$")[1]
+    if n_deg>=9:
+        formula3=formula3.split("$x^{7}$")[0]+r"$x^{7}$"+ "\n"+formula3.split("$x^{7}$")[1]
     
+    """
+    coef_disp_vec0 = ["{:+.2e}".format(c) for c in list(coef_vec)]
+    coef_disp_vec0 = [c[0]+" "+c[1:].replace("e+00","") for c in coef_disp_vec0]
+    coef_disp_vec1 = []
+    for c in coef_disp_vec0:
+        if "e" in c:
+            if "e+01" in c:
+                coef_disp_vec1 += [c.split("e")[0]+"\times 10"]
+            else:
+                coef_disp_vec1 += [c.split("e")[0]+"\times "+"10^{"+str(int(c.split("e")[1]))+"}"]
+        else:
+            coef_disp_vec1 += [c]
+    
+    formula0 = [""]
+    if n_deg>=2:
+        formula0 = [coef_disp_vec1[i] + "x^{"+str(n_deg-i)+"}" for i in range(0, n_deg-1)]
+    
+    if intercept_zero:
+        formula1 = [coef_disp_vec1[-1]+"x "]
+    else:
+        formula1 = [coef_disp_vec1[-2]+"x "+coef_disp_vec1[-1]]
+    
+    formula2 = list(filter(None, formula0+formula1))
+    
+    if formula2[0].split("+")[0]=="":
+        formula2[0] = formula2[0][1:]
+    
+    formula3 = '$y = '+' '.join(formula2) + "$"
+    """
+    #import matplotlib.pyplot as plt
     #plt.title(formula3)
     #plt.show()
     
     
     fig_name = "fitting_"
-    return make_plot([x_data, x_fit], [y_data, y_fit], fig_name,\
-              marker=["o", "None"], line_style=["None", "-"], color=["k", "r"], title = formula3)
+    return (make_plot([x_data, x_fit], [y_data, y_fit], fig_name,\
+              marker=["o", "None"], line_style=["None", "-"], color=["k", "r"],title=formula3), formula3)
     
     

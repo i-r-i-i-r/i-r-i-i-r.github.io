@@ -4,7 +4,6 @@ import panel as pn
 import pandas as pd
 import matplotlib.pyplot as plt
 from analyze_and_visualize import get_plot
-#pn.extension('katex', 'mathjax')
 
 
 # 表示内容の生成における初期設定
@@ -27,16 +26,10 @@ class Widget:
         
         pn.config.sizing_mode = 'stretch_width'
         self.option = Option()
-        self.option.data_1    = pn.widgets.RadioBoxGroup(name= "dataset option",         options= ["example dataset", "your dataset"])
-        self.option.data_2    = pn.widgets.RadioBoxGroup(name= "select example dataset", options=self.DATASET_EX_NAME)
-        self.option.data_3    = pn.widgets.FileInput(name= "uploaded data", accept='.csv') # To try it with your data, upload it here
-        self.option.formula   = pn.widgets.Select(name='formula', options=self.FORMULA_NAME, disabled_options=self.FORMULA_NAME[1:])
-        self.option.polyfit_deg= pn.widgets.IntSlider(name="degree of polyfit", start=0, end=10, value=1)
-        self.option.intercept = pn.widgets.Checkbox(name= "fix the intercept at 0", value=False)
+        self.option.N_particles = pn.widgets.IntSlider(name="No. of particles", start=1, end=100, value=10)
+        self.option.Temperature = pn.widgets.IntSlider(name="Temperature", start=0, end=100, value=25)
         self.plot = pn.pane.Matplotlib()
         #self.formula_disp = pn.pane.LaTeX('\(F(\omega) = \cfrac{1}{\sqrt{2\pi}}\int_{-\infty}^{+\infty}f(t)e^{i\omega t}dt\)', style={'font-size': '18pt'})
-        self.uploaded = 0
-        self.path = ""
         self.plot.param.trigger('object')
         self.update_plot()
         

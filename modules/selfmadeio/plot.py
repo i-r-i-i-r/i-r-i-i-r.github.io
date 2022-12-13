@@ -1,6 +1,10 @@
 import matplotlib.pyplot as plt
 import matplotlib.mathtext as mtxt
 import numpy as np
+#from matplotlib import rc
+
+#reference: http://oversleptabit.com/?p=556
+
 
 # 散布図の作成と出力
 # x_data: np.ndarray
@@ -52,6 +56,8 @@ def make_plot(x_data, y_data, save_name, \
     plt.rcParams['mathtext.default'] = 'regular'
     plt.rcParams['xtick.direction'] = 'in'
     plt.rcParams['ytick.direction'] = 'in'
+    #plt.rcParams['text.usetex'] = True
+    #rc('text', usetex=True)
     """
     plt.rcParams['font.family'] = 'times new roman'
     plt.rcParams['xtick.major.width'] = 1.0
@@ -140,7 +146,7 @@ def make_plot(x_data, y_data, save_name, \
     plt.locator_params(axis='y', nbins=6)
     
     # タイトル
-    plt.title(title)
+    plt.title(title, fontsize=10)
     
     # グリッド
     plt.grid(visible=grid, which='major')
@@ -152,7 +158,7 @@ def make_plot(x_data, y_data, save_name, \
     #plt.gca().yaxis.set_major_locator(ticker.MaxNLocator(integer=True))
     
     # レイアウトの調整
-    #plt.tight_layout()
+    plt.tight_layout()
     
     # 出力
     #plt.savefig(save_name+".png", transparent=True, dpi=600, format="png")
