@@ -64,7 +64,9 @@
             - ./modules/optim/analyze_and_visualize.py
             - ./modules/optim/nonlinopt.py
             - ./modules/optim/widget.py
+            - ./modules/optim/config_opt.json
             - ./modules/selfmadeio/plot.py
+            - ./modules/selfmadeio/io_json.py
     </py-env>
     
     <body>
@@ -119,7 +121,7 @@ from widget import Widget # 自作
 wid = Widget()
 
 # ウィジェットへの入力値が更新されるたびに以下の関数を実行する
-@pn.depends(wid.option.data_1, wid.option.data_2, wid.option.data_3, wid.option.polyfit_deg, wid.option.intercept, watch=True)
+@pn.depends(wid.option.data_1, wid.option.data_2, wid.option.data_3, wid.option.polyfit_deg, wid.option.intercept, wid.option.formula, watch=True)
 def update_plot(*events): # グラフの更新
     wid.update_plot()
 
