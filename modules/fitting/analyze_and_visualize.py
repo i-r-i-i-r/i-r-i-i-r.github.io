@@ -18,6 +18,21 @@ config_opt = read_json("C:\\Users\\irita\\Desktop\\development\\git-pages\\i-r-i
 dataset=pd.read_csv("C:\\Users\\irita\\Desktop\\development\\git-pages\\i-r-i-i-r.github.io\\data\\optim\\example 3.csv")
 """
 
+# 係数の配列から表示用文字列のリストを生成
+def coef2str(coef_vec):
+    coef_disp_vec0 = ["{:+.2e}".format(c) for c in list(coef_vec)]
+    coef_disp_vec0 = [c[0]+" "+c[1:].replace("e+00","") for c in coef_disp_vec0]
+    coef_disp_vec1 = []
+    for c in coef_disp_vec0:
+        if "e" in c:
+            if "e+01" in c:
+                coef_disp_vec1 += [c.split("e")[0]+r"$\times$10"]
+            else:
+                coef_disp_vec1 += [c.split("e")[0]+r"$\times$"+r"10$^{"+str(int(c.split("e")[1]))+"}$"]
+        else:
+            coef_disp_vec1 += [c]
+    return coef_disp_vec1
+
 # 多項式近似
 def polyfit_(x_data, y_data, x_fit, intercept_zero, n_deg):
     # 計算
@@ -38,18 +53,7 @@ def polyfit_(x_data, y_data, x_fit, intercept_zero, n_deg):
         y_fit = np.dot(phi_fit, coef_vec)
     
     # 式（表示用）
-    coef_disp_vec0 = ["{:+.2e}".format(c) for c in list(coef_vec)]
-    coef_disp_vec0 = [c[0]+" "+c[1:].replace("e+00","") for c in coef_disp_vec0]
-    coef_disp_vec1 = []
-    for c in coef_disp_vec0:
-        if "e" in c:
-            if "e+01" in c:
-                coef_disp_vec1 += [c.split("e")[0]+r"$\times$10"]
-            else:
-                coef_disp_vec1 += [c.split("e")[0]+r"$\times$"+r"10$^{"+str(int(c.split("e")[1]))+"}$"]
-        else:
-            coef_disp_vec1 += [c]
-    
+    coef_disp_vec1 = coef2str(coef_vec) # 係数の配列から表示用文字列のリストを生成
     formula0 = [""]
     if n_deg>=2:
         formula0 = [coef_disp_vec1[i] + r"$x^{"+str(n_deg-i)+"}$" for i in range(0, n_deg-1)]
@@ -90,21 +94,21 @@ def consfun(param):
 def calc_Phi_11(x, param, gain):
     s     = sigmoid(x, param, gain)
     ones_ = np.ones_like(x)
-    Phi = np.transpose(np.vstack([ones_*(1-s), x*(1-s), ones_*s, x*s]))
+    Phi = np.transpose(np.vstack([x*(1-s), ones_*(1-s), x*s, ones_*s]))
     return Phi
 
 # 重回帰分析における入力変数の情報を持つ行列の作成
 def calc_Phi_21(x, param, gain):
     s     = sigmoid(x, param, gain)
     ones_ = np.ones_like(x)
-    Phi = np.transpose(np.vstack([ones_*(1-s), x*(1-s), x*x*(1-s), ones_*s, x*s]))
+    Phi = np.transpose(np.vstack([x*x*(1-s), x*(1-s), ones_*(1-s), x*s, ones_*s]))
     return Phi
 
 # 重回帰分析における入力変数の情報を持つ行列の作成
 def calc_Phi_12(x, param, gain):
     s     = sigmoid(x, param, gain)
     ones_ = np.ones_like(x)
-    Phi = np.transpose(np.vstack([ones_*(1-s), x*(1-s), ones_*s, x*s, x*x*s]))
+    Phi = np.transpose(np.vstack([x*(1-s), ones_*(1-s), x*x*s, x*s, ones_*s]))
     return Phi
 
 # シグモイド関数
@@ -152,7 +156,18 @@ def devided_fit(x_data, y_data, x_fit, n_deg):
     y_fit = calc_y(W_opt,  param_opt,  x_fit, gain, calc_Phi)
     
     # 仮
-    formula = str(W_opt)
+    coef_disp_vec1 = coef2str(W_opt)
+    param_disp     = coef2str(param_opt)[0].split("+ ")[-1]
+    if n_deg ==(1,1):
+        formula1 = r"$y = $" + coef_disp_vec1[0].split("+ ")[-1] + r"$x$ " + coef_disp_vec1[1]
+        formula2 = r"$y = $" + coef_disp_vec1[2].split("+ ")[-1] + r"$x$ " + coef_disp_vec1[3]
+        case1    = r"   $(x\leq$" + param_disp + ")"
+        case2    = r"   $(x>$"    + param_disp + ")"
+        formula = formula1 + case1 + "\n" + formula2 + case2
+    elif n_deg ==(2,1):
+        formula = ""
+    elif n_deg ==(1,2):
+        formula = ""
     
     return (y_fit, formula)
 

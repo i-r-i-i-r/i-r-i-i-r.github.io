@@ -11,6 +11,8 @@ from analyze_and_visualize import get_plot
 _INTRO = """
 This app provides an example of **fitting (finding a good approximation formula)**.\n\n
 Use Python to show how well each formula fits the data.\n\n
+
+
 This app works with the framework provided by PyScript and some part of source codes in this app are from example codes of PyScript.\n\n
 This app and PyScript is licensed under Apache 2.0.
 """
@@ -27,7 +29,7 @@ class Widget:
     def __init__(self):
         self.DATASET_EX_NAME = ["example "+str(i+1) for i in range(3)]
         self.DATASET_EX = [pd.read_csv(name+".csv") for name in self.DATASET_EX_NAME]
-        self.FORMULA_NAME = ["polyfit", "devided line", "devided curve"]
+        self.FORMULA_NAME = ["polyfit", "devided line", "devided curve (not supported yet)"]
         self.INTRO = _INTRO
         self.URL = _URL
         
@@ -36,7 +38,7 @@ class Widget:
         self.option.data_1    = pn.widgets.RadioBoxGroup(name= "dataset option",         options= ["example dataset", "your dataset"])
         self.option.data_2    = pn.widgets.RadioBoxGroup(name= "select example dataset", options=self.DATASET_EX_NAME)
         self.option.data_3    = pn.widgets.FileInput(name= "uploaded data", accept='.csv') # To try it with your data, upload it here
-        self.option.formula   = pn.widgets.Select(name='formula', options=self.FORMULA_NAME)
+        self.option.formula   = pn.widgets.Select(name='formula', options=self.FORMULA_NAME, disabled_options=["devided curve (not supported yet)"])
         self.option.polyfit_deg= pn.widgets.IntSlider(name="degree of polyfit", start=0, end=10, value=1)
         self.option.intercept = pn.widgets.Checkbox(name= "fix the intercept at 0", value=False)
         self.plot = pn.pane.Matplotlib()
