@@ -86,7 +86,7 @@
         	  </div>
           </nav>
           <div class="row overflow-hidden" id="content">
-        	<div class="sidenav" id="sidebar">
+        	<div class="sidenav" id="sidebar" style="background-color: #e0ffff;">
         	  <ul class="nav flex-column">
                     <div class="bk-root" id="dataset-option1"></div>
                     <div class="bk-root" id="dataset-option2"></div>
@@ -103,7 +103,7 @@
         	  </a>-->
         	  <div class="bk-root" id="intro"></div>
         	  <a style="color: #ff8c00;" href="https://pyscript.net/">
-        	    <div class="bk-root" id="pyscript url"></div>
+        	    <div class="bk-root" id="PyScript url"></div>
         	  </a>
         	  <a style="color: #ff8c00;" href="https://apache.org/licenses/LICENSE-2.0">
         	    <div  class="bk-root" id="license url"></div>
@@ -118,7 +118,7 @@
         </div>
         <py-script>
 
-#    	  <div class="bk-root" id="formula"></div>
+
 # ライブラリのインポート
 import asyncio
 import panel as pn
@@ -147,8 +147,8 @@ def get_file(fvalue):
 
 # 非同期の更新
 await show(wid.INTRO,              'intro'           )
-await show(wid.URL[0],              'pyscript url'           )
-await show(wid.URL[1],              'license url'           )
+await show(wid.URL[0],             'PyScript url'    )
+await show(wid.URL[1],             'license url'     )
 await show(wid.option.data_1,      'dataset-option1' )
 await show(wid.option.data_2,      'dataset-option2' )
 await show(wid.option.data_3,      'dataset-option3' )
@@ -156,7 +156,7 @@ await show(wid.option.formula,     'formula-option'  )
 await show(wid.option.polyfit_deg, 'polydeg-option'  )
 await show(wid.option.intercept,   'intercept-option')
 await show(wid.plot,               'data-plot'       )
-#await show(wid.formula_disp,       'formula'         )
+#await show(wid.formula_disp,      'formula'         )
 
 
 

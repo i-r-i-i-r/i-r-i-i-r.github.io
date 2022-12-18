@@ -10,13 +10,13 @@ from analyze_and_visualize import get_plot
 # 表示内容の生成における初期設定
 _INTRO = """
 This app provides an example of **fitting (finding a good approximation formula)**.\n\n
-Use Python to show how well each formula fits the data.\n\n\n\n
-This app works with the framework provided by pyscript and some part of source codes in this app are from example codes of pyscript.\n\n
-This app and pyscript is licensed under Apache 2.0.
+Use Python to show how well each formula fits the data.\n\n
+This app works with the framework provided by PyScript and some part of source codes in this app are from example codes of PyScript.\n\n
+This app and PyScript is licensed under Apache 2.0.
 """
 # &copy; 
 
-_URL = ["pyscript", "Apache 2.0"]
+_URL = ["-> PyScript", "-> Apache 2.0"]
 
 class Option:
     pass
