@@ -72,39 +72,48 @@
     <body>
         <div class="container-fluid d-flex flex-column vh-100 overflow-hidden" id="container">
           <nav class="navbar navbar-expand-md navbar-dark sticky-top shadow" id="header" style="background-color: #000000;">
-    	<button type="button" class="navbar-toggle collapsed" id="sidebarCollapse">
-    	  <span class="navbar-toggler-icon"></span>
-    	</button>dim
-    	<div class="app-header">
-    	  <a class="navbar-brand app-logo" href="/">
-    	    <img src="./data/icon.png" class="app-logo">
-    	  </a>
-          <!--
-    	  <a class="title" href="" style="color: #f0ab3c;">Fitting Demo  \(F(\omega) = \cfrac{1}{\sqrt{2\pi}}\int_{-\infty}^{+\infty}f(t)e^{i\omega t}dt\)</a>
-    	  -->
-    	  <a class="title" href="" style="color: #f0ab3c;">Fitting Demo</a>
-    	</div>
+        	  <button type="button" class="navbar-toggle collapsed" id="sidebarCollapse">
+        	    <span class="navbar-toggler-icon"></span>
+        	  </button>dim
+        	  <div class="app-header">
+                <a class="navbar-brand app-logo">
+        	    <img src="./data/icon.png" class="app-logo">
+        	    </a>
+                <!--
+        	    <a class="title" href="" style="color: #f0ab3c;">Fitting Demo  \(F(\omega) = \cfrac{1}{\sqrt{2\pi}}\int_{-\infty}^{+\infty}f(t)e^{i\omega t}dt\)</a>pyscrpt's license
+        	    -->
+        	    <a class="title" href="" style="color: #f0ab3c;">Fitting Demo</a>
+        	  </div>
           </nav>
-        
           <div class="row overflow-hidden" id="content">
-    	<div class="sidenav" id="sidebar">
-    	  <ul class="nav flex-column">
-                <div class="bk-root" id="dataset-option1"></div>
-                <div class="bk-root" id="dataset-option2"></div>
-                <div class="bk-root" id="dataset-option3"></div>
-                <div class="bk-root" id="formula-option"></div>
-                <div class="bk-root" id="polydeg-option"></div>
-                <div class="bk-root" id="intercept-option"></div>
-    	  </ul>
-    	</div>
-    	<div class="col mh-100 float-left" id="main">
-    	  <div class="bk-root" id="intro"></div>
-    	  <div class="bk-root" id="data-plot"></div>
-    	  <!--
-    	  <div class="bk-root" id="formula"></div>
-    	  -->
-          
-    	</div>
+        	<div class="sidenav" id="sidebar">
+        	  <ul class="nav flex-column">
+                    <div class="bk-root" id="dataset-option1"></div>
+                    <div class="bk-root" id="dataset-option2"></div>
+                    <div class="bk-root" id="dataset-option3"></div>
+                    <div class="bk-root" id="formula-option"></div>
+                    <div class="bk-root" id="polydeg-option"></div>
+                    <div class="bk-root" id="intercept-option"></div>
+        	  </ul>
+        	</div>
+        	<div class="col mh-100 float-left" id="main">
+        	  <!--
+        	  <a href="https://github.com/pyscript/pyscript/blob/main/LICENSE">
+        	    <div class="bk-root" id="intro"></div>
+        	  </a>-->
+        	  <div class="bk-root" id="intro"></div>
+        	  <a style="color: #ff8c00;" href="https://pyscript.net/">
+        	    <div class="bk-root" id="pyscript url"></div>
+        	  </a>
+        	  <a style="color: #ff8c00;" href="https://apache.org/licenses/LICENSE-2.0">
+        	    <div  class="bk-root" id="license url"></div>
+        	  </a>
+        	  
+        	  <div class="bk-root" id="data-plot"></div>
+    	      <!--
+    	      <div class="bk-root" id="formula"></div>
+    	      -->
+        	</div>
           </div>
         </div>
         <py-script>
@@ -117,8 +126,11 @@ from panel.io.pyodide import show
 import matplotlib.pyplot as plt
 from widget import Widget # 自作
 
+
 # ウィジェット(=GUIの構成要素)の初期化
 wid = Widget()
+
+
 
 # ウィジェットへの入力値が更新されるたびに以下の関数を実行する
 @pn.depends(wid.option.data_1, wid.option.data_2, wid.option.data_3, wid.option.polyfit_deg, wid.option.intercept, wid.option.formula, watch=True)
@@ -134,13 +146,15 @@ def get_file(fvalue):
 
 
 # 非同期の更新
+await show(wid.INTRO,              'intro'           )
+await show(wid.URL[0],              'pyscript url'           )
+await show(wid.URL[1],              'license url'           )
 await show(wid.option.data_1,      'dataset-option1' )
 await show(wid.option.data_2,      'dataset-option2' )
 await show(wid.option.data_3,      'dataset-option3' )
 await show(wid.option.formula,     'formula-option'  )
 await show(wid.option.polyfit_deg, 'polydeg-option'  )
 await show(wid.option.intercept,   'intercept-option')
-await show(wid.INTRO,              'intro'           )
 await show(wid.plot,               'data-plot'       )
 #await show(wid.formula_disp,       'formula'         )
 
