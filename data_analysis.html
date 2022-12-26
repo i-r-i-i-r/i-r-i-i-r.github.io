@@ -16,7 +16,7 @@ https://goworkship.com/magazine/slide-out-sidebars/#1_Sidebar_template
     <meta name="theme-color" content="#000000">
     <meta name="name" content="i-r-i-i-r">
     
-    <link rel="stylesheet" href="style_each_index.css" type="text/css">
+    <link rel="stylesheet" href="./style/style_each_index.css" type="text/css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/js/lightbox.min.js" type="text/javascript"></script>
@@ -60,9 +60,10 @@ https://goworkship.com/magazine/slide-out-sidebars/#1_Sidebar_template
     <ul class="sidebarMenuInner">
       <!--<li>Index</li>-->
       <li><span><a href="../">Home</a></span></li>
-      <li><span><a href="#valid-dataWebApp">データ分析Webアプリ</a></span></li>
-      <li><a href="#kmeans">&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;k平均法</a></li>
-      <li><a href="#fitting">&nbsp;&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;多項式近似</a></li>
+      <li><span><a href="../data_analysis.html">データ分析アプリ</a></span></li>
+      <li><span><a href="../desktop_app.html">列車ダイヤ検索アプリ</a></span></li>
+      <li><span><a href="../3dmodeling.html">3D造形</a></span></li>
+      <li><span><a href="https://github.com/i-r-i-i-r" target="_blank">GitHub</a></span></li>
       <!--<li><span><a href="../">English Page</a></span></li>-->
       <!--<li><a href="../index_jp.html">日本語</a></li>-->
     </ul>
@@ -70,13 +71,14 @@ https://goworkship.com/magazine/slide-out-sidebars/#1_Sidebar_template
     
     
     <div class="main"id="valid-dataWebApp">
-        <p><span>PyScriptを用いたデータ分析Webアプリ</span></p>
+        <p><span>データ分析アプリ</span></p>
+        <br>
         <p class="explanation">
             2022年5月にAnaconda社から<a href="https://pyscript.net/">PyScript</a>が公開されました。<br>
-            PyScriptとは、HTMLの中でPythonを動作させるためのオープンソースライブラリです。<br><br>
-            Pythonには科学技術計算用のライブラリが豊富に用意されているので、<br>
-            「PyScriptでアプリ化してしまえば、誰でも気軽にデータ分析やシミュレーションにトライできるのでは？」と思い、<br>
-            試しに簡単なアプリを2つ作成しました。
+            PyScriptとは、HTMLの中でPythonを動かすためのオープンソースライブラリです。<br><br>
+            Pythonには科学技術計算用のライブラリが豊富に備わっているので、<br>
+            「PyScriptでアプリ化してしまえば、誰でも気軽にデータ分析やシミュレーションに手を出せるようになるのでは？」と思い、<br>
+            試しに簡単なWebアプリを2つ作りました。
         </p>
         <br><br>
         <br><br>
@@ -84,7 +86,7 @@ https://goworkship.com/magazine/slide-out-sidebars/#1_Sidebar_template
             <span><a href="../kmeans.html" target="_blank">k平均法</a></span>
             <br>
             <p class="explanation">
-                このページでは、サンプルデータセットを利用してk-平均法によるデータ可視化の実演ができます。<br>
+                このページでは、サンプルデータセットを利用してk-平均法によるデータ可視化を体験できます。<br>
                 k平均法とは、データをいくつかのグループに分類する手法です (<a href="https://ja.wikipedia.org/wiki/K%E5%B9%B3%E5%9D%87%E6%B3%95">wikipedia - k平均法</a>)。<br>
                 下の画像は表示画面の一例になります (クリックで拡大できます)。
             </p>
@@ -92,7 +94,8 @@ https://goworkship.com/magazine/slide-out-sidebars/#1_Sidebar_template
                 <img src="./data/screen_kmeans.png" width="500">
             </a>
             <p class="explanation">
-                このページの機能と表示内容は<a href="https://pyscript.net/examples/panel_kmeans.html">PyScriptの例の一つ</a>とほぼ同一ですが、動作検証のためにソースコードの一部を変更しています。
+                このページの機能と表示内容は<a href="https://pyscript.net/examples/panel_kmeans.html">PyScriptの例の一つ</a>とほぼ同一です。<br>
+                動作検証のためにソースコードの一部を変えています。
             </p>
         </div>
         <br><br>
@@ -101,9 +104,9 @@ https://goworkship.com/magazine/slide-out-sidebars/#1_Sidebar_template
             <span><a href="../fitting.html" target="_blank">多項式近似</a></span>
             <br>
             <p class="explanation">
-                このページでは多項式近似のデモンストレーションができます。<br>
+                このページでは多項式近似の実演ができます。<br>
                 手法は一般的な方法と '折れ線近似' から選べます。<br>
-                サンプルデータセットの解析はもちろん、ユーザPCのローカルに保存されたデータセットを指定すればそれに対する解析も可能です。<br>
+                サンプルデータセットの解析はもちろん、ユーザPCに保存されたデータセットを使った解析も可能です。<br>
                 下の画像は表示画面の一例になります (クリックで拡大できます)。
             </p>
             <a href="./data/screen_fitting.png"  data-lightbox="group">
@@ -111,7 +114,7 @@ https://goworkship.com/magazine/slide-out-sidebars/#1_Sidebar_template
             </a>
             <p class="explanation">
                  「example dataset/your dataset」の切替によって表示するUIオブジェクトを変更する方が使いやすそうですね。<br>
-                 おそらくFlaskを利用すれば可能なので、今後勉強がてら改良したいと思っています。
+                 おそらくFlaskを利用すれば可能なので、今後勉強がてら改良したいところです。
             </p>
         </div>
         <br><br><br><br><br><br><br><br>
