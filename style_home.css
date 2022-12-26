@@ -1,0 +1,55 @@
+/*
+https://qiita.com/sottar/items/c59dd8bc0c28b5cac502
+
+*/
+
+
+html, body {
+    font-family: 'Noto Serif JP', serif;
+    background-color:rgba(245, 255, 255, 1.00);
+}
+
+
+.main {
+    text-align:center;
+    margin-left: 20px auto;
+    margin-right: 20px auto;
+}
+div.main span {
+    font-family: 'Noto Serif JP', serif;
+    color: #000000;
+    font-size: 30px;
+    font-weight: 700;
+}
+
+
+div.contents span {
+    color: #ff8c00;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+div.contents a{
+  font-weight: 700;
+    color: #ff8c00;
+    font-size: inherit;
+    background: url(./data/icon_link.png) right center/20px auto no-repeat;
+    padding-right: 26px;
+    padding-bottom: 5px;
+}
+
+a{
+  font-weight: 700;
+    color: #000000;
+    background: url(./data/icon_link_black.png) right center/16px auto no-repeat;
+    padding-right: 20px;
+    padding-bottom: 4px;
+}
+
+
+p.explanation {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 20px;
+}
+
+
