@@ -1,0 +1,287 @@
+/*
+Author: 入谷賢佑
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+*/
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 16px;
+    background-color: rgba(220, 220, 220, 0.6);
+	letter-spacing: 0.03em;
+}
+
+.main{
+    position: relative;
+    padding-top: 80px;
+    z-index: 1;
+}
+
+header {
+    position: fixed;
+    padding: 0;
+    top: 0;
+    width: 100%;
+    height: 60px;
+    display: flex;
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.45) 0%, rgba(255, 255, 255, 0.0) 100%);
+    overflow:hidden;
+    z-index: 100;
+    /*background: linear-gradient(90deg, rgba(0, 0, 0, 1) 100%, rgba(0,0,0,1) 100%);*/
+}
+
+h1 {
+    margin: 0; 
+    padding: 0;
+    font-size: 20px;
+}
+a {	
+    position: relative;
+    text-decoration: none;
+    color: #4b4b4b;
+    z-index: 1000;
+    overflow:hidden;
+}
+nav {
+    margin: 0 0 0 auto;
+}
+li {
+	text-decoration: none;
+    margin: 0 0 0 0;
+    font-size: 16px;
+    text-align: center;
+    display:table;
+    margin: 0 auto;
+	color: #333;
+	letter-spacing: 0.05em;
+	font-weight: bold;
+}
+
+
+.headerLogo img{
+    margin: 12px 10pt 12px;/*上、左右、下*/
+    width: auto;
+    max-height:36px;
+    display: block;
+}
+
+.ul_h {
+    list-style: none;
+    margin: 0 0 0 auto;
+    display: flex;
+}
+.ul_v {
+    list-style: none;
+    margin: 0 0 0 -40px;
+    text-align: center;
+}
+.header-buttom1 {
+    height: 60px;
+    width:180px;
+    display:table-cell;
+    vertical-align:middle;
+	color: black;
+}
+.header-buttom2 {
+    height: 60px;
+    width:80px;
+    display:table-cell;
+    vertical-align:middle;
+	color: black;
+}
+.header-buttom1:hover{
+	background-color: rgba(0, 0, 0, 1);
+	color: #fff;
+	transition:0.35s
+}
+.header-buttom2:hover{
+	background-color: rgba(0, 0, 0, 1);
+	color: #fff;
+	transition:0.35s
+}
+
+.main-buttom {
+    height: 40px;
+    width:200px;
+    display:table-cell;
+    vertical-align:middle;
+    margin: 0 auto;
+    text-align: center;
+}
+.main-buttom:hover{
+	background-color: rgba(0, 0, 0, 1);
+	color: #fff;
+	transition:0.35s
+}
+.url-cltr {
+    height: inherit;
+    width:inherit;
+	background-color: rgba(0, 0, 0, 0.1);
+	color: #333;
+}
+.url-cltr:hover{
+	background-color: rgba(0, 0, 0, 1);
+	color: #fff;
+	transition:0.35s
+}
+
+
+.wrapper{
+    height: 100%;
+    min-height: 100vh;
+    position: relative;/*←相対位置*/
+    padding-bottom: 30px;/*←footerの高さ*/
+    box-sizing: border-box;/*←全て含めてmin-height:100vhに*/
+    z-index: 2;
+}
+
+footer{
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0);
+    color:rgba(0, 0, 0, 1);
+    text-align: right;
+    padding: 10px 20px;
+    position: absolute;/*←絶対位置*/
+    bottom: 0; /*下に固定*/
+}
+
+.for-pc { display:block; }
+.for-sp { display:none; }
+.openbtn { display:none; }
+
+@media only screen and (max-width : 767px){
+    .for-pc { display:none; }
+    .for-sp { display:block; }
+    .openbtn { display:block; }
+}
+
+
+
+
+
+
+
+/*========= ナビゲーションのためのCSS ===============*/
+
+#g-nav{
+    /*position:fixed;にし、z-indexの数値を大きくして前面へ*/
+    position:fixed;
+    z-index: 999;
+    /*ナビのスタート位置と形状*/
+	top:0;
+    right: -120%;
+	width:100%;
+    height: 100vh;/*ナビの高さ*/
+	background:#999;
+    /*動き*/
+	transition: all 0.6s;
+}
+
+/*アクティブクラスがついたら位置を0に*/
+#g-nav.panelactive{
+    right: 0;
+}
+
+/*ナビゲーションの縦スクロール*/
+#g-nav.panelactive #g-nav-list{
+    /*ナビの数が増えた場合縦スクロール*/
+    position: fixed;
+    z-index: 999; 
+    width: 100%;
+    height: 100vh;/*表示する高さ*/
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/*ナビゲーション*/
+#g-nav ul {
+    /*ナビゲーション天地中央揃え*/
+    position: absolute;
+    z-index: 999;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    margin: 0 0 0 -20px;
+}
+
+/*リストのレイアウト設定*/
+
+#g-nav li{
+	text-decoration: none;
+	list-style: none;
+    text-align: center;
+	padding:4px;
+	display: block;
+	color: #333;
+	letter-spacing: 0.05em;
+	font-weight: bold;
+}
+
+
+/*========= ボタンのためのCSS ===============*/
+.openbtn{
+	position:fixed;
+    z-index: 9999;/*ボタンを最前面に*/
+	top:10px;
+	right: 10px;
+	cursor: pointer;
+    width: 50px;
+    height:50px;
+}
+	
+/*×に変化*/	
+.openbtn span{
+    display: inline-block;
+    transition: all .4s;
+    position: absolute;
+    left: 14px;
+    height: 3px;
+    border-radius: 2px;
+	background-color: #333;
+  	width: 45%;
+  }
+
+.openbtn span:nth-of-type(1) {
+	top:15px;	
+}
+
+.openbtn span:nth-of-type(2) {
+	top:23px;
+}
+
+.openbtn span:nth-of-type(3) {
+	top:31px;
+}
+
+.openbtn.active span:nth-of-type(1) {
+    top: 18px;
+    left: 18px;
+    transform: translateY(6px) rotate(-45deg);
+    width: 30%;
+}
+
+.openbtn.active span:nth-of-type(2) {
+	opacity: 0;
+}
+
+.openbtn.active span:nth-of-type(3){
+    top: 30px;
+    left: 18px;
+    transform: translateY(-6px) rotate(45deg);
+    width: 30%;
+}
+
+
+
+
+.profile-text{
+    
+    padding:0 10px;
+    
+}

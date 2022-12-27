@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ja">
+<style type="text/css">
+#photo {
+    width: 300px;
+    height: 600px;
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+}
+
+#photo img {
+    top: 0;
+    left: 0;
+    position: absolute;
+}
+</style>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script type="text/javascript">
+$(function(){
+    var setImg = '#photo';
+    var fadeSpeed = 1600;
+    var switchDelay = 6000;
+
+    $(setImg).children('img').css({opacity:'0'});
+    $(setImg + ' img:first').stop().animate({opacity:'1',zIndex:'20'},fadeSpeed);
+
+    setInterval(function(){
+        $(setImg + ' :first-child').animate({opacity:'0'},fadeSpeed).next('img').animate({opacity:'1'},fadeSpeed).end().appendTo(setImg);
+    },switchDelay);
+});
+</script>
+  <head>
+    <meta name="robots" content="noindex">
+    <link rel="stylesheet" href="./style/style.css" type="text/css">
+    <link rel="icon" href="./data/icon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
+    <title>i-r-i-i-r / Profile</title>
+  </head>
+  <body>
+    <header id="header">
+        <!--<h1><a href="https://i-r-i-i-r.github.io/">i-r-i-i-r</a></h1> -->
+        <a href="/" class="headerLogo"><img src="./data/icon.png" alt="i-r-i-i-r"></a>
+        <nav id="glovalNavi-pc" class="for-pc">
+            <ul class="ul_h">
+                <li id="menu-item-001"><a href="./app_dev.html"><div class="header-buttom1">App development</div></a></li>
+                <li id="menu-item-002"><a href="./3dmodeling.html"><div class="header-buttom1">3d manufacturing</div></a></li>
+                <li id="menu-item-003"><a href="./profile.html"><div class="header-buttom2">Profile</div></a></li>
+                <li id="menu-item-003"><a href="https://github.com/i-r-i-i-r"><div class="header-buttom2">GitHub</div></a></li>
+                <li id="menu-item-003"><a href="https://www.youtube.com/@iritani_drums/videos"><div class="header-buttom2">Drums</div></a></li>
+            </ul>
+        </nav>
+        <div class="openbtn"><span></span><span></span><span></span></div>
+    </header>
+    <div class="wrapper">
+        <div class="main">
+            <div class="profile-text">
+                <h1>入谷 賢佑</h1>
+                <p><b>略歴</b><br>
+                    1994年生まれ、大阪出身<br>
+                    2020年に京都大学大学院を修了 (工学修士)<br>
+                    現在はメーカ企業で研究開発に従事<br>
+                </p>
+                <p><b>学んできた分野</b><br>
+                    化学工学, 制御工学, 流体工学, 伝熱工学, 熱力学<br>
+                    数理最適化, データ解析・モデリング, 画像処理
+                </p>
+                <p><b>主な使用言語</b><br>
+                    Python, MATLAB<br>
+                    HTML, CSS, JavaScriptを最近勉強し始めました
+                </p>
+                <p><b>使用CADソフト</b><br>
+                    DS Mechanical, OpenSCAD<br>
+                </p>
+                <p><b>趣味</b><br>
+                    音楽 (鑑賞, ドラムの演奏), プログラミング, 芸術鑑賞<br>
+                    たまに写真も撮ります
+                </p>
+                <p><b>好きな動物</b><br>
+                    白い柴犬
+                </p>
+                <p><b>連絡先</b><br>
+                    ken.iritani.0[at-mark]gmail.com
+                </p>
+                <br>
+            </div>
+        </div>
+        
+        <nav id="g-nav">
+            <div id="g-nav-list"><!--ナビの数が増えた場合縦スクロールするためのdiv※不要なら削除-->
+                <ul class="ul_v_sp">
+                    <li><b>Menu</b></li><br>
+                    <li id="menu-item-001"><a href="./app_dev.html"><div class="main-buttom">App development</div></a></li>
+                    <li id="menu-item-002"><a href="./3dmodeling.html"><div class="main-buttom">3d manufacturing</div></a></li>
+                    <li id="menu-item-003"><a href="./profile.html"><div class="main-buttom">Profile</div></a></li>
+                    <li id="menu-item-003"><a href="https://github.com/i-r-i-i-r"><div class="main-buttom">GitHub</div></a></li>
+                    <li id="menu-item-003"><a href="https://www.youtube.com/@lambdadrums7263"><div class="main-buttom">Drums</div></a></li>
+                </ul>
+            </div>
+        </nav>
+        <footer>
+            <small>&copy; 2022 Kensuke Iritani</small>
+        </footer>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="style/js/5-1-14.js"></script>
+  </body>
+</html>
+<!--
+https://rico-notes.com/programming/html/header-design/
+
+-->
