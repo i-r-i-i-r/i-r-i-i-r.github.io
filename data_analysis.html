@@ -21,7 +21,7 @@
 $(function(){
     var setImg = '#photo';
     var fadeSpeed = 1600;
-    var switchDelay = 6000;
+    var switchDelay = 10000;
 
     $(setImg).children('img').css({opacity:'0'});
     $(setImg + ' img:first').stop().animate({opacity:'1',zIndex:'20'},fadeSpeed);
@@ -34,19 +34,23 @@ $(function(){
   <head>
     <meta name="robots" content="noindex">
     <link rel="stylesheet" href="./style/style.css" type="text/css">
-    <link rel="icon" href="./data/icon.png">
+    <link rel="icon" href="./style/data/icon.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/js/lightbox.min.js" type="text/javascript"></script>
     <title>i-r-i-i-r / Data Analysis App</title>
   </head>
   <body>
     <header id="header">
         <!--<h1><a href="https://i-r-i-i-r.github.io/">i-r-i-i-r</a></h1> -->
-        <a href="/" class="headerLogo"><img src="./data/icon.png" alt="i-r-i-i-r"></a>
+        <a href="/" class="headerLogo"><img src="./style/data/icon.png" alt="i-r-i-i-r"></a>
         <nav id="glovalNavi-pc" class="for-pc">
             <ul class="ul_h">
                 <li id="menu-item-001"><a href="./app_dev.html"><div class="header-buttom1">App development</div></a></li>
